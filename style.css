@@ -1,0 +1,897 @@
+
+.shop-name {
+    display: inline-flex;
+    gap: 3px;
+}
+
+.word {
+    font-weight: 700;
+    border-radius: 6px;
+    color: white;
+    background: transparent;
+    animation: cycle 4s linear infinite;
+}
+
+/* Each word activates for 1 second */
+.word:nth-child(1) { animation-delay: 0s; }
+.word:nth-child(2) { animation-delay: 1s; }
+.word:nth-child(3) { animation-delay: 2s; }
+.word:nth-child(4) { animation-delay: 3s; }
+
+/* Keyframes for 1-second highlight */
+@keyframes cycle {
+    0% {
+        background: linear-gradient(135deg, #D4AF37, #f8e7a1, #D4AF37);
+        opacity: 1;
+        color: black;
+    }
+    20% {
+        background: linear-gradient(135deg, #D4AF37, #f8e7a1, #D4AF37);
+        opacity: 1;
+        color: black;
+    }
+    25% {
+        background: transparent;
+        color: white;
+        opacity: 1;
+    }
+    100% {
+        background: transparent;
+        color: white;
+        opacity: 1;
+    }
+}
+
+
+
+
+/* =========================================
+   THEME VARIABLES
+   - Colors, font family, base tokens
+========================================= */
+:root {
+    --color-bg: #050608;
+    --color-gold: #D4AF37;
+    --color-gold-hover: #ffc44f;
+    --color-text: #FFFFFF;
+    --color-grey: #B3B3B3;
+    --color-darker: #0a0c10;
+    --color-professional-dark: #121212;
+    --font-main: 'Outfit', sans-serif;
+    /* Font sizes are optimized for readability across devices */
+}
+
+/* =========================================
+   BASE LAYOUT & TYPOGRAPHY
+========================================= */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+}
+
+a {
+    transition: all 0.3s ease;
+}
+
+.text-gold {
+    color: var(--color-gold) !important;
+}
+
+.bg-darker {
+    background-color: var(--color-darker);
+}
+
+.border-gold-subtle {
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+/* =========================================
+   SECTION DIVIDERS (under headings)
+========================================= */
+.divider {
+    height: 3px;
+    width: 20px;
+    background-color: var(--color-gold);
+    margin: 15px auto 0;
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.divider1 {
+    height: 3px;
+    width: 240px;
+    transform-origin: center;
+}
+
+.divider2 {
+    height: 3px;
+    width: 270px;
+    transform-origin: center;
+}
+
+.divider3 {
+    height: 3px;
+    width: 180px;
+    transform-origin: center;
+}
+
+.divider4 {
+    height: 3px;
+    width: 460px;
+    transform-origin: center;
+}
+
+.divider5 {
+    height: 3px;
+    width: 140px;
+    transform-origin: center;
+}
+
+.divider6 {
+    height: 3px;
+    width: 270px;
+}
+
+.text-muted {
+    font-size: 13.5px !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* =========================================
+   NAVBAR
+   - Fixed top, glass effect, neon lines
+========================================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    background-color: rgba(5, 6, 8, 0.98);
+    backdrop-filter: blur(12px) !important;
+    transition: all 0.3s ease !important;
+    padding: 5px 0 !important;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    padding: 10px 0 !important;
+}
+
+/* NEON LINE ANIMATION FIX */
+.navbar::before,
+.navbar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    /* Thinner line for elegance */
+    /* Use CSS variables for consistent neon color */
+    background: linear-gradient(90deg,
+            transparent,
+            var(--color-gold-hover),
+            transparent);
+    box-shadow: 0 0 5px var(--color-gold-hover);
+    /* Neon glow effect */
+    animation: navGlow 4s linear infinite;
+    /* Slightly faster animation */
+    pointer-events: none;
+}
+
+.navbar::before {
+    top: 0;
+}
+
+.navbar::after {
+    bottom: 0;
+}
+
+@keyframes navGlow {
+    0% {
+        transform: translateX(-15%);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateX(15%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-15%);
+        opacity: 0.8;
+    }
+}
+
+.navbar-brand span {
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    font-size: 1rem;
+}
+
+/* NAV SPACING FIX: Remove padding/margins from containers */
+.navbar-nav {
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.navbar-collapse {
+    /* Ensures no extra height/space when collapsed */
+}
+
+/* Nav link core styling */
+.nav-link {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1.2px;
+    font-weight: 500;
+    color: var(--color-grey) !important;
+    padding: 0.45rem 0.95rem;
+    border-radius: 4px;
+    background: none !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease-out;
+    /* Enable smooth transition on color/background */
+}
+
+/* PROFESSIONAL NAV HOVER EFFECT (Background & Text) */
+.nav-link:hover:not(.btn-gold) {
+    color: var(--color-gold-hover) !important;
+    background: rgba(212, 175, 55, 0.12) !important;
+    /* Slightly more prominent background on hover/active */
+    box-shadow: none !important;
+}
+
+/* Nav link underline effect (matches neon theme) */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: var(--color-gold-hover);
+    box-shadow: 0 0 4px var(--color-gold-hover);
+    /* Subtle glow on hover line */
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-link:not(.btn):hover::after {
+    width: 90%;
+}
+
+/* =========================================
+   PRIMARY BUTTONS
+   - Gold CTA button with pulse and hover
+========================================= */
+.btn-gold {
+    background-color: var(--color-gold-hover) !important;
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35) !important;
+    color: #050608 !important;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    /* PREMIUM GOLD PULSE */
+    animation: goldPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes goldPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+    }
+
+    50% {
+        transform: scale(1.04);
+        box-shadow: 0 0 26px rgba(212, 175, 55, 0.55);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+    }
+}
+
+/* HOVER EFFECT */
+.btn-gold:hover {
+    background: linear-gradient(45deg, #6a11cb, #2575fc) !important;
+    box-shadow: 0 12px 30px rgba(37, 117, 252, 0.4) !important;
+    color: white !important;
+    animation: hoverShake 0.4s ease-in-out 1;
+}
+
+@keyframes hoverShake {
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-3px);
+    }
+
+    40% {
+        transform: translateX(3px);
+    }
+
+    60% {
+        transform: translateX(-2px);
+    }
+
+    80% {
+        transform: translateX(2px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Glow wrapper for logo / icons */
+.glow {
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.glow::before,
+.glow::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    /* Glow distance around the icon */
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(212, 175, 55, 0.45) 0%,
+            rgba(212, 175, 55, 0.1) 40%,
+            transparent 70%);
+    z-index: -1;
+    animation: glowPulse 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Ensure the button link has no underline effect */
+.btn-gold::after {
+    display: none !important;
+}
+
+/* Outline button variant */
+.btn-outline-gold {
+    color: var(--color-gold);
+    border-color: var(--color-gold);
+}
+
+.btn-outline-gold:hover {
+    background-color: var(--color-gold);
+    color: #fff;
+}
+
+/* =========================================
+   SERVICES SECTION
+   - Hover background, right-aligned actions
+   - Large gallery thumbnails
+========================================= */
+.service-row:hover {
+    background-color: rgba(212, 175, 55, 0.08);
+}
+
+.service-actions {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Change align to end for desktop alignment */
+}
+
+/* BIGGER SERVICE IMAGE SIZE (Desktop) */
+.gallery-thumb-wrapper {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    border: none;
+    gap: 10px;
+}
+
+.gallery-thumb {
+    width: 340px;
+    border: none;
+    background-color: none;
+    padding: 4px 2px;
+    border-radius: 5px;
+    height: 250px;
+}
+
+.gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    filter: brightness(0.95);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, filter 0.3s ease;
+}
+
+/* =========================================
+   REVIEWS & ABOUT / STUDIO VISUALS
+========================================= */
+.review-img {
+    border: 4px solid var(--color-gold);
+    padding: 4px;
+}
+
+.shadow-gold {
+    box-shadow: -20px 20px 0 rgba(212, 175, 55, 0.3);
+}
+
+/* =========================================
+   SECTION HEADING & SCROLL ANIMATIONS
+========================================= */
+.anim-heading {
+    font-size: 2.3rem;
+    letter-spacing: 1px;
+    opacity: 0;
+}
+
+.scroll-animate.visible .anim-heading {
+    animation: titleUp 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.scroll-animate.visible .divider {
+    animation: underlineGrow 1.5s ease 0.2s forwards;
+}
+
+.scroll-animate.visible p.text-muted:first-of-type {
+    animation: fadeIn 1s ease 0s forwards;
+}
+
+@keyframes titleUp {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes underlineGrow {
+    from {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+/* Generic scroll anim base */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 2s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* **************************************************
+* NEW HERO ANIMATION CSS *
+************************************************** */
+.hero-tagline,
+.hero-heading,
+.hero-btn {
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   CALL ICON "JUMP" ANIMATION
+========================================= */
+.jump {
+    display: inline-block;
+    animation: iconJump 1.2s ease-in-out infinite;
+}
+
+@keyframes iconJump {
+    0%,
+    20%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-6px);
+    }
+
+    60% {
+        transform: translateY(-3px);
+    }
+}
+
+/* =========================================
+   WHATSAPP FLOATING BUTTON
+   - Desktop + mobile behavior
+========================================= */
+.whatsapp-float {
+    position: fixed;
+    right: 30px;
+    top: 90px;
+    width: 55px;
+    height: 55px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* small floating movement always */
+.whatsapp-float {
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+
+/* hover effect */
+.whatsapp-float:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* shake when scrolling (we add this class by JS) */
+.whatsapp-float.shake {
+    animation: shake 0.4s ease;
+}
+
+/* keyframes */
+@keyframes floatUpDown {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-3px);
+    }
+
+    50% {
+        transform: translateX(3px);
+    }
+
+    75% {
+        transform: translateX(-2px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* =========================================
+   TEXT EFFECTS & PLACEHOLDERS
+   - Global text-shadow and input placeholder
+========================================= */
+.text-shadow {
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.75),
+        0 0 12px rgba(212, 175, 55, 0.35);
+    /* soft gold glow */
+}
+
+::placeholder {
+    color: #b3b3b3 !important;
+    /* soft light grey */
+    opacity: 1;
+    /* ensures it shows fully */
+}
+
+/* Date icon color custom (white) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+/* Time icon white */
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+
+/* =========================================
+   RESPONSIVE TWEAKS (MOBILE)
+   - Headings, padding, services, gallery
+   - WhatsApp button reposition
+========================================= */
+@media (max-width: 768px) {
+
+    .anim-heading {
+        font-size: 1.8rem;
+    }
+
+    .section-padding {
+        padding: 50px 0;
+    }
+
+    /* Mobile Fix: Align content left and make thumbnail fill space */
+    .service-actions {
+        text-align: left;
+        margin-top: 1.5rem;
+        align-items: center;
+    }
+
+    .gallery-thumb-wrapper {
+        margin-top: 1rem;
+        justify-content: flex-start;
+    }
+
+    .gallery-thumb {
+        width: 100%;
+        padding: 4px 2px;
+        border-radius: 5px;
+        min-width: 280px;
+    }
+
+    .gallery-thumb img {
+        height: 230px;
+        width: 100%;
+    }
+
+    .whatsapp-float {
+        position: fixed;
+        right: 20px;
+        top: 650px;
+        width: 45px;
+        height: 45px;
+        background-color: #25d366;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        text-decoration: none;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        z-index: 9999;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .divider1 {
+        height: 3px;
+        width: 170px;
+        transform-origin: center;
+    }
+
+    .divider2 {
+        height: 3px;
+        width: 210px;
+        transform-origin: center;
+    }
+
+    .divider3 {}
+
+    .divider4 {
+        height: 3px;
+        width: 260px;
+        transform-origin: center;
+    }
+
+    .divider5 {
+        height: 3px;
+        width: 100px;
+        transform-origin: center;
+    }
+
+    .divider6 {
+        height: 3px;
+        width: 190px;
+    }
+}
+
+/* --------------------------------------------------
+   OUR WORKS SECTION
+   - Desktop: horizontal carousel with arrows
+   - Mobile: collage-style grid
+-------------------------------------------------- */
+#our-works {
+    background-color: var(--color-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.works-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.works-track {
+    display: flex;
+    gap: 15px;
+    transition: transform 0.5s ease-out;
+    /* Will be controlled by JS */
+}
+
+.work-item {
+    flex: 0 0 auto;
+    width: 280px;
+    /* Fixed width for consistency */
+    height: 350px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+    border-color: var(--color-gold);
+}
+
+.work-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.work-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Carousel navigation buttons */
+.works-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(5, 6, 8, 0.8);
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.works-nav-btn:hover {
+    background-color: var(--color-gold);
+    color: #000;
+}
+
+.works-prev {
+    left: 10px;
+}
+
+.works-next {
+    right: 10px;
+}
+
+
+
+footer {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Background video */
+.footer-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    z-index: -2;
+}
+
+/* Dark overlay for text clarity */
+.footer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65); /* 65% dark overlay */
+    z-index: -1;
+}
+
+
+
+@media (max-width: 768px) {
+    .work-item {
+        width: 220px;
+        height: 280px;
+    }
+}
+
+/* MOBILE RESPONSIVE TWEAKS - COLLAGE VIEW */
+@media (max-width: 768px) {
+    .work-item {
+        width: calc(50% - 10px) !important;
+        height: 200px !important;
+        margin-bottom: 15px !important;
+    }
+
+    .works-track {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        transform: none !important;
+        gap: 10px !important;
+        display: flex !important;
+    }
+
+    .works-nav-btn {
+        display: none !important;
+    }
+
+    .works-carousel-wrapper {
+        overflow: visible !important;
+    }
+}
